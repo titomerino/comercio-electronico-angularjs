@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comercio Electrónico</title>
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body ng-controller="appController">
+    <header class="site-header">
+        <div class="container">
+            <h1 class="h3 _mb-0">Comercio Electrónico</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Consulta de promociones</h2>
+        <form class="search-form" ng-submit="searchPromotion()">
+            <div class="content">
+                <div class="field">
+                    <label for="aplicationDate">Fecha:</label>
+                    <input
+                        type="datetime-local"
+                        name="aplicationDate"
+                        id="aplicationDate"
+                        ng-model="promotionForm.aplicationDate"
+                        required
+                    >
+                </div>
+                <div class="field">
+                    <label for="brandId">Cadena de dsitribución:</label>
+                    <select
+                        name="brandId"
+                        id="brandId"
+                        ng-model="promotionForm.brandId"
+                        ng-options="brand.brandId as brand.name for brand in brands"
+                        required
+                    >
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="productId">Producto:</label>
+                    <select
+                        name="productId"
+                        id="productId"
+                        ng-model="promotionForm.productId"
+                        ng-options="product.productId as product.name for product in products"
+                        required
+                    >
+                    </select>
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="button -primary _mr-1"><strong>Buscar</strong></button>
+            <button
+                type="button"
+                class="button -secondary"
+                ng-click="cleanForm()"
+            ><strong>Limpiar</strong></button>
+        </form>
+        <h3 ng>Promoción a aplicar</h2>
+        <div class="status-container" ng-if="dataDB.length == 0" >{{ txtMessage }}</div>
+        <div class="table-wrapper"  ng-if="dataDB.length != 0">
+            <table class="table-promotion">
+                <thead>
+                  <tr>
+                    <th><strong>Cadena</strong></th>
+                    <th><strong>Producto</strong></th>
+                    <th><strong>Tarifa</strong></th>
+                    <th><strong>Aplica</strong></th>
+                    <th><strong>Precio</strong></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in dataDB">
+                    <td>{{ item.brand.name }}</td>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.price | currency:"€ " }}</td>
+                    <td>{{ item.startDate }}  --  {{ item.endDate }}</td>
+                    <td>{{ item.price | currency:"€ " }}</td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
