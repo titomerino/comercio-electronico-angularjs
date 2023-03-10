@@ -22,12 +22,12 @@
         <form class="search-form" ng-submit="searchPromotion()">
             <div class="content">
                 <div class="field">
-                    <label for="aplicationDate">Fecha:</label>
+                    <label for="applicationDate">Fecha:</label>
                     <input
                         type="datetime-local"
-                        name="aplicationDate"
-                        id="aplicationDate"
-                        ng-model="promotionForm.aplicationDate"
+                        name="applicationDate"
+                        id="applicationDate"
+                        ng-model="promotionForm.applicationDate"
                         required
                     >
                 </div>
@@ -49,7 +49,7 @@
                         name="productId"
                         id="productId"
                         ng-model="promotionForm.productId"
-                        ng-options="product.productId as product.name for product in products"
+                        ng-options="product.prodId as product.name for product in products"
                         required
                     >
                         <option value="">--Seleccionar--</option>
@@ -71,6 +71,7 @@
                 <thead>
                   <tr>
                     <th><strong>N°</strong></th>
+                    <th><strong>Prioridad</strong></th>
                     <th><strong>Cadena</strong></th>
                     <th><strong>Producto</strong></th>
                     <th><strong>Tarifa</strong></th>
@@ -81,10 +82,11 @@
                 <tbody>
                   <tr ng-repeat="item in dataDB">
                     <td>{{ item.priceList }}</td>
+                    <td>{{ item.priority }}</td>
                     <td>({{ item.brand.brandId }}) - {{ item.brand.name }}</td>
                     <td>({{ item.product.productId }}) - {{ item.product.name }}</td>
                     <td>{{ item.price | currency:"€ " }}</td>
-                    <td>{{ item.startDate }}  --  {{ item.endDate }}</td>
+                    <td>{{ item.startDateStr }}  --  {{ item.endDateStr }}</td>
                     <td>{{ item.price | currency:"€ " }}</td>
                   </tr>
                 </tbody>

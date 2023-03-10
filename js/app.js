@@ -1,6 +1,10 @@
 var app = angular.module("app", []);
-var apiURL = "http://localhost:8080/api/promotion";
+var apiURL = "https://b3a7-190-86-105-69.ngrok.io/api/promotion";
 const dateFormat = "YYYY-MM-DD HH:mm:ss";
+const headers = {
+    'Content-Type': 'application/json',
+    'ngrok-skip-browser-warning': true
+};
 
 app.controller("appController", function ($scope, $http) {
 
@@ -12,28 +16,39 @@ app.controller("appController", function ($scope, $http) {
     $scope.searchPromotion = function () {
         $scope.dataDB = [];
         var formData = {
-            aplicationDate: "",
+            applicationDate: "",
             brandId: "",
             productId: ""
         };
         $scope.txtMessage = "Buscando Promociones ...";
-        formData.aplicationDate = moment($scope.promotionForm.aplicationDate).format(dateFormat);
-        formData.brandId = $scope.promotionForm.brandId;
-        formData.productId = $scope.promotionForm.productId;
-        console.log(formData);
-
-        // $http.get(apiURL + "/getPrice").then(function (data) {
-        //     $scope.dataDB = data.data;
-        // }, function (error) {
-        //     console.log(error);
-        // });
+        formData.applicationDate = moment($scope.promotionForm.applicationDate).format(dateFormat);
+        formData.brandId = String($scope.promotionForm.brandId);
+        formData.productId = String($scope.promotionForm.productId);
+        
+        let params = '?' + new URLSearchParams(formData).toString();
+        $http({
+            method: 'GET',
+            url: apiURL + "/getPromotionNow" + params,
+            headers: headers
+        }).then(function (data) {
+            $scope.dataDB = data.data;
+            if ($scope.dataDB.length == 0) {
+                $scope.txtMessage = "No hay promociones disponibles";
+            }
+        }, function (error) {
+            console.log(error);
+        });
     }
 
     /**
      * Obtiene todo los precios almacenados
      */
     $scope.getAllPrices = function () {
-        $http.get(apiURL + "/getAllPrices").then(function (data) {
+        $http({
+            method: 'GET',
+            url: apiURL + "/getAllPrices",
+            headers: headers
+        }).then(function (data) {
             $scope.dataDB = data.data;
         }, function (error) {
             console.log(error);
@@ -44,7 +59,11 @@ app.controller("appController", function ($scope, $http) {
      * Obtiene todas las cadenas de distribución
      */
     $scope.getAllBrands = function () {
-        $http.get(apiURL + "/getAllBrans").then(
+        $http({
+            method: 'GET',
+            url: apiURL + "/getAllBrans",
+            headers: headers
+        }).then(
             function (data) {
                 $scope.brands = data.data;
             },
@@ -58,7 +77,11 @@ app.controller("appController", function ($scope, $http) {
      * Obtiene todos los productos
      */
         $scope.getAllProducts = function () {
-            $http.get(apiURL + "/getAllProducts").then(
+            $http({
+                method: 'GET',
+                url: apiURL + "/getAllProducts",
+                headers: headers
+            }).then(
                 function (data) {
                     $scope.products = data.data;
                 },

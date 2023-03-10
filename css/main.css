@@ -28,6 +28,7 @@ input[type="datetime-local"] {
     border: 0;
     border-radius: 5px;
     cursor: pointer;
+    box-shadow: 2px 4px 10px -4px rgba(0,0,0,0.75);
 }
 .button:hover,
 .button:focus,
@@ -35,13 +36,13 @@ input[type="datetime-local"] {
     background-color: green;
 }
 .button.-secondary {
-    background-color: white;
+    background-color: aliceblue;
     color: black;
 }
 .button.-secondary:hover,
 .button.-secondary:focus,
 .button.-secondary:active {
-    background-color: gray;
+    background-color: white;
 }
 /* typography end */
 
@@ -74,7 +75,7 @@ input[type="datetime-local"] {
 .table-promotion {
     width: 100%;
     border-collapse: collapse;
-    border: 1px solid gray;
+    border: 1px solid gainsboro;
 
 }
 .table-promotion th, td {
