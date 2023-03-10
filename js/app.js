@@ -1,5 +1,5 @@
 var app = angular.module("app", []);
-var apiURL = "https://b3a7-190-86-105-69.ngrok.io/api/promotion";
+var apiURL = "https://74ce-190-86-105-69.ngrok.io/api/promotion";
 const dateFormat = "YYYY-MM-DD HH:mm:ss";
 const headers = {
     'Content-Type': 'application/json',
