@@ -85,7 +85,7 @@
                     <td>({{ item.brand.brandId }}) - {{ item.brand.name }}</td>
                     <td>({{ item.product.productId }}) - {{ item.product.name }}</td>
                     <td>{{ item.startDateStr }}  --  {{ item.endDateStr }}</td>
-                    <td>{{ item.price | currency:"€ " }}</td>
+                    <td>{{ item.price | currency:item.curr + " " }}</td>
                   </tr>
                 </tbody>
             </table>

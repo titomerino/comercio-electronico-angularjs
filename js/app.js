@@ -50,6 +50,7 @@ app.controller("appController", function ($scope, $http) {
             headers: headers
         }).then(function (data) {
             $scope.dataDB = data.data;
+            console.log(data.data);
         }, function (error) {
             console.log(error);
         });
