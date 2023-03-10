@@ -73,21 +73,14 @@ app.controller("appController", function ($scope, $http) {
      */
     $scope.cleanForm = function () {
         $scope.promotionForm.aplicationDate = '';
-        $scope.promotionForm.brandId = '';
-        $scope.promotionForm.productId = '';
+        $scope.promotionForm.brandId = null;
+        $scope.promotionForm.productId = null;
         $scope.getAllPrices();
     }
     /** functions end */
     /** Varibles */
     $scope.brands = [];
-
-    $scope.products = [
-        {
-            idProduct: 1,
-            name: "Camisa Negra"
-        }
-
-    ];
+    $scope.products = [];
 
     $scope.promotionForm = {};
     $scope.dataDB = [];

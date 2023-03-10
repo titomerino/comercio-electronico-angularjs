@@ -38,8 +38,9 @@
                         id="brandId"
                         ng-model="promotionForm.brandId"
                         ng-options="brand.brandId as brand.name for brand in brands"
-                        required
+                        required="required"
                     >
+                        <option value="">--Seleccionar--</option>
                     </select>
                 </div>
                 <div class="field">
@@ -51,6 +52,7 @@
                         ng-options="product.productId as product.name for product in products"
                         required
                     >
+                        <option value="">--Seleccionar--</option>
                     </select>
                 </div>
             </div>
@@ -68,6 +70,7 @@
             <table class="table-promotion">
                 <thead>
                   <tr>
+                    <th><strong>N°</strong></th>
                     <th><strong>Cadena</strong></th>
                     <th><strong>Producto</strong></th>
                     <th><strong>Tarifa</strong></th>
@@ -77,8 +80,9 @@
                 </thead>
                 <tbody>
                   <tr ng-repeat="item in dataDB">
-                    <td>{{ item.brand.name }}</td>
-                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.priceList }}</td>
+                    <td>({{ item.brand.brandId }}) - {{ item.brand.name }}</td>
+                    <td>({{ item.product.productId }}) - {{ item.product.name }}</td>
                     <td>{{ item.price | currency:"€ " }}</td>
                     <td>{{ item.startDate }}  --  {{ item.endDate }}</td>
                     <td>{{ item.price | currency:"€ " }}</td>
@@ -87,5 +91,10 @@
             </table>
         </div>
     </div>
+    <footer class="site-footer">
+        <div class="container">
+            Desarrollado por DevPro.
+        </div>
+    </footer>
 </body>
 </html>
