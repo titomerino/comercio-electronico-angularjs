@@ -50,7 +50,6 @@ app.controller("appController", function ($scope, $http) {
             headers: headers
         }).then(function (data) {
             $scope.dataDB = data.data;
-            console.log(data.data);
         }, function (error) {
             console.log(error);
         });
@@ -96,7 +95,7 @@ app.controller("appController", function ($scope, $http) {
      * Limpia el formulario
      */
     $scope.cleanForm = function () {
-        $scope.promotionForm.aplicationDate = '';
+        $scope.promotionForm.applicationDate = null;
         $scope.promotionForm.brandId = null;
         $scope.promotionForm.productId = null;
         $scope.getAllPrices();
